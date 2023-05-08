@@ -12,9 +12,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int counter = 0;
-
-  void onClicked() {}
+  List<int> numbers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +27,11 @@ class _AppState extends State<App> {
                 "Click Count ",
                 style: TextStyle(fontSize: 30),
               ),
-              Text(
-                "$counter",
-                style: const TextStyle(fontSize: 30),
-              ),
+              for (var num in numbers) Text("$num"),
               IconButton(
-                onPressed: () {
-                  counter++;
-                },
+                onPressed: () => setState(() {
+                  numbers.add(numbers.length);
+                }),
                 icon: const Icon(Icons.add_box_rounded),
               )
             ],
