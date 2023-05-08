@@ -13,6 +13,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   List<int> numbers = [];
+  bool isShow = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +23,13 @@ class _AppState extends State<App> {
               titleLarge: TextStyle(
         color: Colors.red,
       ))),
-      home: const Scaffold(
-        backgroundColor: Color(0xfff4eddb),
+      home: Scaffold(
+        backgroundColor: const Color(0xfff4eddb),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MyLargeTitle(),
+              isShow ? const MyLargeTitle() : const Text("Nothing"),
               // for (var num in numbers) Text("$num"),
               // IconButton(
               //   onPressed: () => setState(() {
@@ -36,6 +37,11 @@ class _AppState extends State<App> {
               //   }),
               //   icon: const Icon(Icons.add_box_rounded),
               // )
+              IconButton(
+                  onPressed: () => setState(() {
+                        isShow = !isShow;
+                      }),
+                  icon: const Icon(Icons.remove_red_eye))
             ],
           ),
         ),
@@ -44,13 +50,33 @@ class _AppState extends State<App> {
   }
 }
 
-class MyLargeTitle extends StatelessWidget {
+class MyLargeTitle extends StatefulWidget {
   const MyLargeTitle({
     super.key,
   });
 
   @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  // initState 위젯 생성 시 한번만 호출됨
+  @override
+  void initState() {
+    print("initState");
+    super.initState();
+  }
+
+  // dispose 위젯 제거 시 호출됨
+  @override
+  void dispose() {
+    print("dispose");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build");
     return Text(
       "My Large Title",
       style: TextStyle(
